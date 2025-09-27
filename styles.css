@@ -1,0 +1,562 @@
+/* Pink Sesame - Tic Tac Toe Game Styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #fff0f5, #ffc0cb);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #8b008b;
+}
+
+.game-container {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(199, 21, 133, 0.2);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  margin: 1rem;
+}
+
+h1 {
+  color: #c71585;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
+}
+
+.status {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #c71585;
+  min-height: 1.5rem;
+  padding: 0.5rem;
+  background: linear-gradient(45deg, #ffb6c1, #ffc0cb);
+  border-radius: 10px;
+  border: 2px solid #ff69b4;
+  transition: all 0.3s ease;
+}
+
+/* Pink-themed styling for different player turns (Requirement 3.3) */
+.status.player-pp-turn {
+  background: linear-gradient(45deg, #ffb6c1, #c71585);
+  color: #8b008b;
+  border-color: #c71585;
+  box-shadow: 0 3px 10px rgba(199, 21, 133, 0.3);
+}
+
+.status.player-sms-turn {
+  background: linear-gradient(45deg, #ffc0cb, #ff69b4);
+  color: #c71585;
+  border-color: #ff69b4;
+  box-shadow: 0 3px 10px rgba(255, 105, 180, 0.3);
+}
+
+.status.game-result {
+  background: linear-gradient(45deg, #ff69b4, #8b008b);
+  color: white;
+  border-color: #8b008b;
+  box-shadow: 0 5px 15px rgba(139, 0, 139, 0.4);
+  animation: resultPulse 2s ease-in-out;
+}
+
+@keyframes resultPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 5px 15px rgba(139, 0, 139, 0.4);
+  }
+  25% {
+    transform: scale(1.02);
+    box-shadow: 0 7px 20px rgba(139, 0, 139, 0.5);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(139, 0, 139, 0.6);
+  }
+  75% {
+    transform: scale(1.02);
+    box-shadow: 0 7px 20px rgba(139, 0, 139, 0.5);
+  }
+}
+
+/* Smooth game state transition animations */
+.game-container {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.game-container.game-over {
+  transform: scale(0.98);
+  filter: brightness(0.95);
+}
+
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 3px;
+  background-color: #ff69b4;
+  border-radius: 10px;
+  padding: 3px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+}
+
+.cell {
+  background-color: #ffc0cb;
+  border: none;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80px;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cell:hover {
+  background-color: #ffb6c1;
+  transform: scale(1.05);
+  box-shadow: 0 3px 10px rgba(199, 21, 133, 0.3);
+}
+
+.cell:active {
+  transform: scale(0.95);
+}
+
+.cell.pp {
+  color: #c71585;
+  background-color: #ffb6c1;
+  text-shadow: 2px 2px 4px rgba(139, 0, 139, 0.3);
+}
+
+.cell.sms {
+  color: #ff69b4;
+  background-color: #fff0f5;
+  text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
+}
+
+.cell.winner {
+  background: linear-gradient(45deg, #ff69b4, #c71585);
+  color: white;
+  animation: winnerPulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes winnerPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+  }
+  25% {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(199, 21, 133, 0.6);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(199, 21, 133, 0.8);
+  }
+  75% {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(139, 0, 139, 0.7);
+  }
+}
+
+/* Enhanced winner cell animation with sparkle effect */
+.cell.winner::after {
+  content: '✨';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 0.8rem;
+  animation: sparkle 1.5s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+    opacity: 1;
+  }
+}
+
+.new-game-btn {
+  background: linear-gradient(45deg, #ff69b4, #c71585);
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.new-game-btn:hover {
+  background: linear-gradient(45deg, #c71585, #8b008b);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(199, 21, 133, 0.4);
+}
+
+.new-game-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(199, 21, 133, 0.3);
+}
+
+.new-game-btn:focus {
+  outline: 3px solid rgba(255, 105, 180, 0.5);
+  outline-offset: 2px;
+}
+
+/* Enhanced Responsive Design for Mobile Devices */
+@media (max-width: 768px) {
+  .game-container {
+    padding: 1.8rem;
+    margin: 1rem;
+    border-radius: 15px;
+  }
+  
+  .game-board {
+    gap: 2px;
+    padding: 2px;
+  }
+  
+  .cell {
+    min-height: 70px;
+    font-size: 1.8rem;
+    border-radius: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 0.5rem;
+  }
+  
+  .game-container {
+    padding: 1.5rem;
+    margin: 0.5rem;
+    border-radius: 12px;
+    max-width: 350px;
+  }
+  
+  h1 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+  
+  .status {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.4rem;
+  }
+  
+  .game-board {
+    gap: 2px;
+    padding: 2px;
+  }
+  
+  .cell {
+    min-height: 65px;
+    font-size: 1.6rem;
+    border-radius: 3px;
+  }
+  
+  .new-game-btn {
+    padding: 0.7rem 1.8rem;
+    font-size: 0.95rem;
+    border-radius: 20px;
+  }
+}
+
+@media (max-width: 360px) {
+  .game-container {
+    padding: 1.2rem;
+    margin: 0.3rem;
+  }
+  
+  h1 {
+    font-size: 1.4rem;
+  }
+  
+  .cell {
+    min-height: 55px;
+    font-size: 1.4rem;
+  }
+  
+  .status {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .game-container {
+    padding: 1rem;
+    margin: 0.2rem;
+  }
+  
+  h1 {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .cell {
+    min-height: 50px;
+    font-size: 1.2rem;
+  }
+  
+  .status {
+    font-size: 0.85rem;
+    padding: 0.3rem;
+  }
+  
+  .new-game-btn {
+    padding: 0.6rem 1.4rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* Touch-friendly improvements for mobile */
+@media (hover: none) and (pointer: coarse) {
+  .cell {
+    min-height: 70px;
+    font-size: 1.8rem;
+  }
+  
+  .cell:hover {
+    transform: none;
+  }
+  
+  .cell:active {
+    transform: scale(0.95);
+    background-color: #ffb6c1;
+  }
+  
+  .new-game-btn:hover {
+    transform: none;
+  }
+  
+  .new-game-btn:active {
+    transform: scale(0.95);
+  }
+}
+
+/* Accessibility improvements */
+.cell:focus {
+  outline: 3px solid rgba(255, 105, 180, 0.7);
+  outline-offset: 2px;
+}
+
+/* Enhanced animations for mark placement with smooth transitions */
+.cell.pp,
+.cell.sms {
+  animation: markPlacement 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes markPlacement {
+  0% {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(-90deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* Smooth transition for cell state changes */
+.cell {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced hover effects with smooth transitions */
+.cell:hover:not(.pp):not(.sms) {
+  background: linear-gradient(135deg, #ffb6c1, #ffc0cb);
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(199, 21, 133, 0.4);
+}
+
+/* Subtle pulse animation for empty cells on hover */
+.cell:hover:not(.pp):not(.sms)::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 105, 180, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: hoverPulse 1s ease-in-out infinite;
+}
+
+@keyframes hoverPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0.1;
+  }
+}
+
+/* Enhanced game over state styling with smooth transitions */
+.game-over .cell:not(.winner) {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transition: opacity 0.5s ease;
+}
+
+.game-over .cell:not(.winner):hover {
+  transform: none;
+  background-color: #ffc0cb;
+}
+
+/* Refined pink color scheme consistency */
+.status.player-pp-turn {
+  background: linear-gradient(135deg, #ffb6c1, #c71585);
+  color: #fff;
+  border-color: #c71585;
+  box-shadow: 0 4px 12px rgba(199, 21, 133, 0.35);
+}
+
+.status.player-sms-turn {
+  background: linear-gradient(135deg, #ffc0cb, #ff69b4);
+  color: #8b008b;
+  border-color: #ff69b4;
+  box-shadow: 0 4px 12px rgba(255, 105, 180, 0.35);
+}
+
+/* Enhanced button animations */
+.new-game-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.new-game-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.new-game-btn:hover::before {
+  left: 100%;
+}
+
+/* Subtle entrance animation for the game container */
+.game-container {
+  animation: gameEntrance 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes gameEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Enhanced focus states for better accessibility */
+.cell:focus-visible {
+  outline: 3px solid rgba(255, 105, 180, 0.8);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(255, 105, 180, 0.2);
+}
+
+.new-game-btn:focus-visible {
+  outline: 3px solid rgba(255, 105, 180, 0.8);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(255, 105, 180, 0.2);
+}
+
+/* Smooth color transitions for all interactive elements */
+* {
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Performance optimizations */
+.cell,
+.new-game-btn,
+.status {
+  will-change: transform, opacity, background-color;
+}
+
+/* Ensure consistent pink theme across all states */
+:root {
+  --primary-pink: #ff69b4;
+  --light-pink: #ffb6c1;
+  --dark-pink: #c71585;
+  --pale-pink: #ffc0cb;
+  --background-pink: #fff0f5;
+  --text-pink: #8b008b;
+}
+
+/* Apply consistent color variables */
+body {
+  background: linear-gradient(135deg, var(--background-pink), var(--pale-pink));
+  color: var(--text-pink);
+}
+
+.game-board {
+  background-color: var(--primary-pink);
+}
+
+.cell {
+  background-color: var(--pale-pink);
+}
+
+.cell:hover:not(.pp):not(.sms) {
+  background: linear-gradient(135deg, var(--light-pink), var(--pale-pink));
+}
+
+.cell.pp {
+  color: var(--dark-pink);
+  background-color: var(--light-pink);
+}
+
+.cell.sms {
+  color: var(--primary-pink);
+  background-color: var(--background-pink);
+}
+
+/* Refined animation performance */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
