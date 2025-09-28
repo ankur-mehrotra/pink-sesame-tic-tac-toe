@@ -3,34 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Pink Sesame - A pink-themed tic tac toe game for two players">
-    <meta name="keywords" content="tic tac toe, game, pink, web game">
-    <title>Pink Sesame - Tic Tac Toe</title>
+    <meta name="description" content="Pink Sesame - A pink-themed multiplayer tic tac toe game">
+    <meta name="keywords" content="tic tac toe, game, pink, web game, multiplayer, online">
+    <title>Pink Sesame - Multiplayer Tic Tac Toe</title>
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 </head>
 <body>
     <div class="game-container">
         <header>
-            <h1 class="game-title">Pink Sesame - Tic Tac Toe</h1>
+            <h1 class="game-title">Pink Sesame - Multiplayer Tic Tac Toe</h1>
         </header>
         
         <main>
-            <div class="status" id="status">Player PP's Turn</div>
-            
-            <div class="game-board" id="gameBoard">
-                <div class="cell" data-index="0"></div>
-                <div class="cell" data-index="1"></div>
-                <div class="cell" data-index="2"></div>
-                <div class="cell" data-index="3"></div>
-                <div class="cell" data-index="4"></div>
-                <div class="cell" data-index="5"></div>
-                <div class="cell" data-index="6"></div>
-                <div class="cell" data-index="7"></div>
-                <div class="cell" data-index="8"></div>
+            <!-- Multiplayer Setup Screen -->
+            <div class="multiplayer-setup" id="multiplayerSetup">
+                <div class="setup-options">
+                    <h2>🌸 Choose Game Mode</h2>
+                    <button class="mode-btn" id="localGameBtn">👥 Local Game (Same Device)</button>
+                    <button class="mode-btn" id="createRoomBtn">🌐 Create Online Room</button>
+                    <button class="mode-btn" id="joinRoomBtn">🔗 Join Online Room</button>
+                </div>
+                
+                <div class="room-setup" id="roomSetup" style="display: none;">
+                    <div class="room-create" id="roomCreate" style="display: none;">
+                        <h3>Creating Room...</h3>
+                        <p>Share this room code with your friend:</p>
+                        <div class="room-code" id="roomCode">Loading...</div>
+                        <p class="waiting-message">Waiting for player to join...</p>
+                    </div>
+                    
+                    <div class="room-join" id="roomJoin" style="display: none;">
+                        <h3>Join Room</h3>
+                        <input type="text" id="roomCodeInput" placeholder="Enter room code" maxlength="6">
+                        <button id="joinBtn">Join Game</button>
+                        <div class="join-status" id="joinStatus"></div>
+                    </div>
+                </div>
             </div>
             
-            <div class="controls">
-                <button class="new-game-btn" id="newGameBtn" style="display: none;">New Game</button>
+            <!-- Game Screen -->
+            <div class="game-screen" id="gameScreen" style="display: none;">
+                <div class="game-info">
+                    <div class="player-info">
+                        <span class="player-label" id="playerLabel">You are: PP</span>
+                        <span class="room-info" id="roomInfo"></span>
+                    </div>
+                    <div class="status" id="status">Waiting for game to start...</div>
+                </div>
+                
+                <div class="game-board" id="gameBoard">
+                    <div class="cell" data-index="0"></div>
+                    <div class="cell" data-index="1"></div>
+                    <div class="cell" data-index="2"></div>
+                    <div class="cell" data-index="3"></div>
+                    <div class="cell" data-index="4"></div>
+                    <div class="cell" data-index="5"></div>
+                    <div class="cell" data-index="6"></div>
+                    <div class="cell" data-index="7"></div>
+                    <div class="cell" data-index="8"></div>
+                </div>
+                
+                <div class="controls">
+                    <button class="new-game-btn" id="newGameBtn" style="display: none;">New Game</button>
+                    <button class="leave-room-btn" id="leaveRoomBtn">Leave Room</button>
+                </div>
             </div>
         </main>
     </div>

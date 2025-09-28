@@ -1,4 +1,4 @@
-/* Pink Sesame - Tic Tac Toe Game Styles */
+/* Pink Sesame - Multiplayer Tic Tac Toe Game Styles */
 
 * {
   margin: 0;
@@ -558,5 +558,192 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+/* Multipl
+ayer Setup Styles */
+.multiplayer-setup {
+  text-align: center;
+  padding: 2rem;
+}
+
+.setup-options h2 {
+  color: #c71585;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
+.mode-btn {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 1rem auto;
+  padding: 1rem 2rem;
+  background: linear-gradient(45deg, #ff69b4, #c71585);
+  color: white;
+  border: none;
+  border-radius: 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+}
+
+.mode-btn:hover {
+  background: linear-gradient(45deg, #c71585, #8b008b);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(199, 21, 133, 0.4);
+}
+
+.room-setup {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  border: 2px solid #ff69b4;
+}
+
+.room-code {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #c71585;
+  background: #fff0f5;
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 1rem 0;
+  border: 2px solid #ff69b4;
+  letter-spacing: 0.2em;
+}
+
+.waiting-message {
+  color: #8b008b;
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+#roomCodeInput {
+  width: 200px;
+  padding: 0.8rem;
+  font-size: 1.2rem;
+  text-align: center;
+  border: 2px solid #ff69b4;
+  border-radius: 10px;
+  margin: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+#joinBtn {
+  background: linear-gradient(45deg, #ff69b4, #c71585);
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+.join-status {
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.join-status.error {
+  color: #dc3545;
+}
+
+.join-status.success {
+  color: #28a745;
+}
+
+/* Game Screen Styles */
+.game-screen {
+  text-align: center;
+}
+
+.game-info {
+  margin-bottom: 1.5rem;
+}
+
+.player-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 182, 193, 0.3);
+  border-radius: 10px;
+}
+
+.player-label {
+  font-weight: bold;
+  color: #c71585;
+}
+
+.room-info {
+  font-size: 0.9rem;
+  color: #8b008b;
+}
+
+.leave-room-btn {
+  background: linear-gradient(45deg, #ff69b4, #c71585);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 1rem;
+  font-size: 0.9rem;
+}
+
+.leave-room-btn:hover {
+  background: linear-gradient(45deg, #c71585, #8b008b);
+}
+
+/* Connection Status */
+.connection-status {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.connection-status.connected {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.connection-status.disconnected {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Responsive adjustments for multiplayer */
+@media (max-width: 480px) {
+  .player-info {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .mode-btn {
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+  }
+  
+  .room-code {
+    font-size: 1.5rem;
+  }
+  
+  #roomCodeInput {
+    width: 150px;
+    font-size: 1rem;
   }
 }
